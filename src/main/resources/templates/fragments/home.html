@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    
+    <head th:insert="~{fragments/fragments :: modelread('Home')}"></head>
+   
+    <table>
+        <tr>
+            <header th:insert="~{fragments/header :: modelheader}"></header> 
+        </tr>
+        <tr>
+          <body th:insert="~{fragments/banner :: modelbanner}"></body>        
+        </tr>
+    </table>
+    
+    <!-- Serviços da empresa -->
+      <div id="services-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+                <h3 class="main-title">Nossas especialidades</h3>
+            </div>
+            <div class="col-md-4 service-box" >
+            
+                <i class="fas fa-heart"></i>
+              <h4>Chocolates Artesanais</h4>
+              <p>Produzidos artesanalmente com carinho para você.</p>
+            </div>
+            <div class="col-md-4 service-box">
+              <i class="fas fa-shopping-cart"></i>
+              <h4>E-commerces</h4>
+              <p>Temos uma plataforma própria de e-commerce para melhor atender.</p>
+            </div>
+            <div class="col-md-4 service-box">
+              <i class="fas fa-handshake"></i>
+              <h4>Programa de Fidelidade</h4>
+              <p>Possúimos um programa de recompensas personalizável e dedicada a você.</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    
+    
+    
+    <!-- <footer th:insert="~{fragments/fragments :: modelcontato}"></footer>comment -->
+    
+    <footer th:insert="~{fragments/footer :: modelfooter}"></footer>
+    
+</html>

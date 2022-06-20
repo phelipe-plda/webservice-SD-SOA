@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:insert="~{fragments/fragments :: modelread('Lista de produtos')}"></head>
+    <header th:insert="~{fragments/header :: modelheader}"></header> 
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-10">
+                    <h3 class="main-title">Lista de produtos</h3>
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr class="bg-warning">
+                                <th>Item</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th COLSPAN="2" ><a th:href="@{/produtos/form/}">Novo cadastro</a></th>  
+                            </tr>
+                        </thead>
+                        <tr th:each="a,i : ${produtos}">
+                            <td th:text="${i.index+1}"> </td>
+                            <td th:text="${a.descricao}"> </td>
+                            <td th:text="${#numbers.formatCurrency(a.valor)}"></td> 
+                            <td> <a th:href="@{/produtos/edit/{id}(id=${a.id})}">Editar</a> </td>
+                            <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"  th:href="@{/produtos/remove/{id}(id=${a.id})}">Excluir</a> </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="~{fragments/footer :: modelfooter}"></footer>
+    </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="~{fragments/fragments :: modelread('Lista de vendas')}"></head>
+    <header th:insert="~{fragments/header :: modelheader}"></header>
+
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-10">
+                    <h3 class="main-title">Detalhes da venda</h3>
+                    <table  class="table table-hover">
+                        <thead>
+                            <tr class="bg-warning">
+                                <th>Id</th>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Total</th>
+                                <th>Cliente</th>
+                                <th></th>    
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="a : ${vendas}">   
+                            <td th:text="${a.id}"> </td>
+                            <td th:text="${#temporals.format(a.data, 'dd/MM/yyyy')}"></td>
+                          
+                            <td>
+                                <table>
+                                    <tbody>
+                                       
+                                        <tr>
+                                            <th>Produto</th>
+                                            <th>Quantidade</th>
+                                            <th>Valor</th>
+                                            
+                                        </tr>
+                                        <tr th:each="i : ${a.itensVendas}">
+                                            <td th:text="${i.produto.descricao}"> </td>
+                                            <td th:text="${i.qtd}"> </td>
+                                            <td th:text="${#numbers.formatCurrency(i.produto.valor)}"> </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td th:text="${#numbers.formatCurrency(a.ValorTotal())}"> </td>
+                            <td th:text="${a.clientePessoaFisica.nome}"> </td>
+                            <td> <a th:href="@{/vendas/list}">Retornar</a> </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer th:insert="~{fragments/footer :: modelfooter}"></footer>
+    </body>
+</html>
+
+
+
+
+
+
+

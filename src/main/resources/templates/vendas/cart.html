@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:insert="~{fragments/fragments :: modelread('Cesta de produtos')}"></head>
+    <header th:insert="~{fragments/header :: modelheader}"></header>
+
+
+
+
+
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-10">
+                    <h3 class="main-title">Cesta de protudos</h3>
+                                        
+                            <span th:text="${!#strings.isEmpty(erroteste)} ? ${erroteste}" style="color:red"> </span>
+                                        
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr class="bg-warning">
+                                <th>Item</th>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Quantidade</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>  
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="i,status : ${session.venda.itensVendas}">
+
+                                <td th:text="${status.index+1}"> </td>
+                                <td th:text="${i.produto.descricao}"> </td>
+                                <td th:text="${#numbers.formatCurrency(i.produto.valor)}"> </td>
+                                <td th:text="${i.qtd}"> </td>
+                                <td th:text="${#numbers.formatCurrency(i.ValorTotal())}"> </td>
+
+                                <td><a onclick="return window.confirm('Tem certeza que deseja excluir este item?')"  th:href="@{/vendas/removeitemcart/{index}(index=${status.index})}">Excluir</a> </td>
+                            </tr>
+                        </tbody>
+                        <tfooter>
+                            <tr >
+                                <td colspan="4" style="text-align: right" >Valor Total</td>        
+                                <td th:text="${#numbers.formatCurrency(session.venda.ValorTotal())}"></td>           
+                                <td ></td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                <td>
+                            </tr>
+                        </tfooter>
+                    </table>
+                </div>
+                <div class="d-flex bd-highlight mb-3" >
+                    <form th:action="@{/vendas/form}" class="mr-auto p-2 bd-highlight">
+                        <input class="main-btn-2" type="submit" value="Continuar comprando" style="background-color:#ffa500">     
+                    </form>
+
+                    <form th:action="@{/vendas/save}" method="get" class="p-2 bd-highlight">
+                        <input class="main-btn-2" type="submit" value="Finalizar Compra">   
+                        <select th:name="idCliente"  >
+                            <option th:each="c : ${clientespessoafisica}" 
+                                    th:value="${c.id}"
+                                    th:text="${c.nome}"/>
+                        </select>
+                    </form>
+                       
+                        
+                      
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
+

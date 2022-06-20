@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head th:insert="~{fragments/fragments :: modelread('Lista de produtos')}"></head>
+    <header th:insert="~{fragments/header :: modelheader}"></header> 
+
+    <body>
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-10">
+                    <h3 class="main-title">Lista de clientes</h3>
+                    
+                    <form th:action="@{/clientespessoafisica/filtrar}" method="get">
+                        <input name="nomefiltrar" placeholder="Filtrar por nome">
+                        <input type="submit" value="Consultar">
+                    </form>
+                    
+                
+                    
+                  
+                    
+                    <table class="table table-striped" >
+                        <thead>
+                            <tr class="bg-warning">
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th COLSPAN="2" ><a th:href="@{/clientespessoafisica/form/}">Novo cadastro</a></th>  
+                            </tr>
+                        </thead>
+                        <tr th:each="a,i : ${clientespessoafisica}">
+                            <td th:text="${a.id}"> </td>
+                            <td th:text="${a.nome}"> </td>
+                            <td th:text="${a.cpf}"></td> 
+                            <td> <a th:href="@{/clientespessoafisica/edit/{id}(id=${a.id})}">Editar</a> </td>
+                            <td> <a onclick="return window.confirm('Tem certeza que deseja excluir este produto?')"  th:href="@{/clientespessoafisica/remove/{id}(id=${a.id})}">Excluir</a> </td>
+                        </tr>
+                    </table>
+                 </div>
+            </div>
+        </div>
+        <footer th:insert="~{fragments/footer :: modelfooter}"></footer>
+    </body>
+</html>

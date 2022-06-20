@@ -1,0 +1,41 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  >
+    
+    <head th:insert="~{fragments/fragments :: modelread('Cadastro de produtos')}"></head>
+
+    <body>
+        <header th:insert="~{fragments/header :: modelheader}"></header> 
+           <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-8">
+                    <h3 class="main-title">Cadastro de Clientes</h3>
+
+
+                    <form th:action="${clientePessoaFisica.id == null} ? @{/clientespessoafisica/save} : @{/clientespessoafisica/update}" th:object="${clientePessoaFisica}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <h6>Nome</h6>
+                        <input type="text" th:field="*{nome}"  >
+                        <label th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color:red "></label>
+
+                        <p></p>
+                        <h6>CPF</h6>
+                        <input type="text" th:field="*{cpf}" maxlength="14" placeholder="XXX.XXX.XXX-XX" >
+                        <label th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}" style="color:red "></label>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        
+                        <div class="center">
+                            <input type="submit" value="Incluir cadastro" class="main-btn-2">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <form>
+            </form>
+        </div>
+       <footer th:insert="~{fragments/footer :: modelfooter}"></footer>
+    </body>
+</html>
